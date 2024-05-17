@@ -40,13 +40,13 @@ public class LivroController {
 		return ResponseEntity.ok(livroOpt.get());
 	}
 
-	@PostMapping
+	@PostMapping("/inserir")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Livro inserir(@Valid @RequestBody Livro livro) {
 		return livroRepository.save(livro);
 	}
 
-	@PutMapping("/{id}")
+	@PutMapping("/atualizar/{id}")
 	public ResponseEntity<Livro> atualizar(@PathVariable Long id, @Valid @RequestBody Livro livro) {
 		if (!livroRepository.existsById(id)) {
 			return ResponseEntity.notFound().build();
@@ -56,7 +56,7 @@ public class LivroController {
 		return ResponseEntity.ok(livroRepository.save(livro));
 	}
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Void> deletar(@PathVariable Long id) {
 		if (!livroRepository.existsById(id)) {
 			return ResponseEntity.notFound().build();
